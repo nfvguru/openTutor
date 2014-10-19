@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh 
 
 op=$1
 
@@ -31,7 +31,7 @@ prg_template ()
 	PRG_NAME="${PRG_NAME}_${PRG_CNT}"
 	echo -e "Enter Program Desc: \c"
 	read PRG_DESC
-	echo "$(date): $PRG_NAME : $PRG_DESC" > ${PRG_HIST}
+	echo "$PRG_CNT) $(date): $PRG_NAME : $PRG_DESC" >> ${PRG_HIST}
 }
 
 
@@ -52,6 +52,15 @@ create_templates ()
 	echo -e "$N_STR" > ${N_DIR}/${PRG_NAME}.js
 	echo -e "$P_STR" > ${P_DIR}/${PRG_NAME}.py
 }
+
+if [ "$op" != "n" ] ; then
+	PRG_CNT=$2
+	if [ "$PRG_CNT" == "" ]; then
+	    cat  $PRG_HIST
+	    echo -e "ENTER the index to edit/run: \c"
+	    read PRG_CNT
+	fi 
+fi
 
 case $op in 
 	n)
